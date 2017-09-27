@@ -17,8 +17,16 @@ public class Practice08ObjectAnimatorView extends View {
     RectF arcRectF = new RectF();
     Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-    // TODO 为 progress 添加 getter 和 setter 方法（setter 方法记得加 invalidate()）
     float progress = 0;
+
+    public float getProgress() {
+        return progress;
+    }
+
+    public void setProgress(float progress) {
+        this.progress = progress;
+        invalidate();
+    }
 
     public Practice08ObjectAnimatorView(Context context) {
         super(context);
@@ -50,6 +58,7 @@ public class Practice08ObjectAnimatorView extends View {
         paint.setStrokeWidth(dpToPixel(15));
         arcRectF.set(centerX - radius, centerY - radius, centerX + radius, centerY + radius);
         canvas.drawArc(arcRectF, 135, progress * 2.7f, false, paint);
+        // 2.7 means fully only 270 degree, with 100(%).
 
         paint.setColor(Color.WHITE);
         paint.setStyle(Paint.Style.FILL);

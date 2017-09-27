@@ -33,10 +33,27 @@ public class Practice03Scale extends RelativeLayout {
         animateBt = (Button) findViewById(R.id.animateBt);
         imageView = (ImageView) findViewById(R.id.imageView);
 
-        animateBt.setOnClickListener(new View.OnClickListener() {
+        final int[] count = {-1};
+        final int total = 4;
+        animateBt.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
-                // TODO 在这里处理点击事件，通过 View.animate().scaleX/Y() 来让 View 放缩
+                count[0]++;
+                count[0] = count[0] % total;
+                switch (count[0]) {
+                    case 0:
+                        imageView.animate().scaleX(1.5f);
+                        break;
+                    case 1:
+                        imageView.animate().scaleX(1);
+                        break;
+                    case 2:
+                        imageView.animate().scaleY(.8f);
+                        break;
+                    case 3:
+                        imageView.animate().scaleY(1);
+                        break;
+                }
             }
         });
     }

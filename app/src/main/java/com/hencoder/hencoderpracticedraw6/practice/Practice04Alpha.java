@@ -33,10 +33,21 @@ public class Practice04Alpha extends RelativeLayout {
         animateBt = (Button) findViewById(R.id.animateBt);
         imageView = (ImageView) findViewById(R.id.imageView);
 
+        final int[] count = {-1};
+        final int total = 2;
         animateBt.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
-                // TODO 在这里处理点击事件，通过 View.animate().alpha() 来改变 View 的透明度
+                count[0]++;
+                count[0] = count[0] % total;
+                switch (count[0]) {
+                    case 0:
+                        imageView.animate().alpha(0);
+                        break;
+                    case 1:
+                        imageView.animate().alpha(1);
+                        break;
+                }
             }
         });
     }

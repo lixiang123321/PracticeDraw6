@@ -1,5 +1,7 @@
 package com.hencoder.hencoderpracticedraw6.practice;
 
+import com.hencoder.hencoderpracticedraw6.R;
+
 import android.content.Context;
 import android.graphics.Outline;
 import android.graphics.Path;
@@ -12,8 +14,6 @@ import android.view.ViewOutlineProvider;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
-import com.hencoder.hencoderpracticedraw6.R;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static com.hencoder.hencoderpracticedraw6.Utils.dpToPixel;
@@ -45,10 +45,40 @@ public class Practice01Translation extends RelativeLayout {
             imageView.setOutlineProvider(new MusicOutlineProvider());
         }
 
+        final int[] count = {-1};
+        final int total = 6;
         animateBt.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
-                // TODO 在这里处理点击事件，通过 View.animate().translationX/Y/Z() 来让 View 平移
+                count[0]++;
+                count[0] = count[0] % total;
+                switch (count[0]) {
+                    case 0:
+                        imageView.animate().translationX(dpToPixel(100));
+                        break;
+                    case 1:
+                        // translationX means X at, it's a exact location.
+                        // default X,Y,Z = 0.
+//                        imageView.animate().translationX(0);
+                        imageView.animate().translationXBy(-dpToPixel(100));
+                        break;
+                    case 2:
+                        imageView.animate().translationY(dpToPixel(50));
+                        break;
+                    case 3:
+                        imageView.animate().translationY(0);
+                        break;
+                    case 4:
+                        if (SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+                            imageView.animate().translationZ(dpToPixel(15));
+                        }
+                        break;
+                    case 5:
+                        if (SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+                            imageView.animate().translationZ(0);
+                        }
+                        break;
+                }
             }
         });
     }
